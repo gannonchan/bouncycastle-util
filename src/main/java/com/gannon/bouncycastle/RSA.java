@@ -20,6 +20,11 @@ import java.util.Base64;
 
 public final class RSA {
 
+    static {
+        // 静态注册BC算法
+        Security.addProvider(new BouncyCastleProvider());
+    }
+
     /**
      * 生成秘钥串对;公钥[0]，私钥[1]
      *
@@ -152,7 +157,6 @@ public final class RSA {
             cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.ENCRYPT_MODE, initPublicKey(publicKeyString, true));
         } else {
-            Security.addProvider(new BouncyCastleProvider());
             cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding", "BC");
             cipher.init(Cipher.ENCRYPT_MODE, initPublicKey(publicKeyString, false));
         }
@@ -175,7 +179,6 @@ public final class RSA {
             cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.DECRYPT_MODE, initPrivateKey(privateKeyString, true));
         } else {
-            Security.addProvider(new BouncyCastleProvider());
             cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding", "BC");
             cipher.init(Cipher.DECRYPT_MODE, initPrivateKey(privateKeyString, false));
         }
@@ -198,7 +201,6 @@ public final class RSA {
             cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.ENCRYPT_MODE, initPrivateKey(privateKeyString, true));
         } else {
-            Security.addProvider(new BouncyCastleProvider());
             cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding", "BC");
             cipher.init(Cipher.ENCRYPT_MODE, initPrivateKey(privateKeyString, false));
         }
@@ -221,7 +223,6 @@ public final class RSA {
             cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding");
             cipher.init(Cipher.DECRYPT_MODE, initPublicKey(publicKeyString, true));
         } else {
-            Security.addProvider(new BouncyCastleProvider());
             cipher = Cipher.getInstance("RSA/ECB/PKCS1Padding", "BC");
             cipher.init(Cipher.DECRYPT_MODE, initPublicKey(publicKeyString, false));
         }
